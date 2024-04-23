@@ -10,8 +10,9 @@ const Navbar = () => {
                     to="/"
                     style={({ isActive, isPending, isTransitioning }) => {
                         return {
+                            color: isActive ? "green" : "",
                             fontWeight: isActive ? "bold" : "",
-                            color: isPending ? "red" : "black",
+                            background: isPending ? "red" : "",
                             viewTransitionName: isTransitioning ? "slide" : "",
                         };
                     }}
@@ -25,8 +26,9 @@ const Navbar = () => {
                     to="/adduser"
                     style={({ isActive, isPending, isTransitioning }) => {
                         return {
+                            color: isActive ? "green" : "",
                             fontWeight: isActive ? "bold" : "",
-                            color: isPending ? "red" : "black",
+                            background: isPending ? "red" : "",
                             viewTransitionName: isTransitioning ? "slide" : "",
                         };
                     }}
@@ -40,8 +42,9 @@ const Navbar = () => {
                     to="/userlist"
                     style={({ isActive, isPending, isTransitioning }) => {
                         return {
+                            color: isActive ? "green" : "",
                             fontWeight: isActive ? "bold" : "",
-                            color: isPending ? "red" : "black",
+                            background: isPending ? "red" : "",
                             viewTransitionName: isTransitioning ? "slide" : "",
                         };
                     }}

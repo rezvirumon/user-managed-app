@@ -6,6 +6,7 @@ import Error from "../pages/NotFound/Error";
 import About from "../pages/About/About";
 import AddUser from "../pages/AddUser/AddUser";
 import UserList from "../pages/UserList/UserList";
+import EditUser from "../pages/EditUser/EditUser";
 
 
 
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
             {
                 path: '/userlist',
                 element: <UserList></UserList>
+            },
+            {
+                path: '/edituser',
+                element: <EditUser></EditUser>
             },
             {
                 path: 'about',
