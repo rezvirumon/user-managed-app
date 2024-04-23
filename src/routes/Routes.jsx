@@ -32,7 +32,7 @@ const router = createBrowserRouter([
                 element: <UserList></UserList>
             },
             {
-                path: '/edituser',
+                path: '/edituser/:id',
                 element: <EditUser></EditUser>
             },
             {
