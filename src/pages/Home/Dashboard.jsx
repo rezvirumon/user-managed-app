@@ -23,7 +23,7 @@ const Dashboard = () => {
     }, 0);
 
     // Define criteria for identifying advanced users
-    const totalAdvancedUsers = users.filter(user => user.pay > 101).length;
+    const totalAdvancedUsers = users.filter(user => user.pay > 500).length;
 
     const totalPaidUsers = users.filter(user => user.due === 0).length;
 

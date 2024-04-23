@@ -31,11 +31,16 @@ const AddUser = () => {
         }, 1000);
     };
 
+    const isValidMacAddress = (mac) => {
+        const macRegex = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
+        return macRegex.test(mac);
+    };
+
     return (
         <div className="container mx-auto">
             <div className="my-5 p-3 shadow-xl">
                 <h3 className="text-center my-3 text-3xl">Add User</h3>
-                <div className="w-full h-[60vh]">
+                <div className="w-full h-full lg:h-[60vh]">
                     <form className="card-body" onSubmit={handleSubmit}>
                         <div className="grid lg:grid-cols-2 lg:gap-10">
                             <div className="form-control">
@@ -74,13 +79,16 @@ const AddUser = () => {
                                 </label>
                                 <input
                                     type="text"
-                                    placeholder="MAC Address"
+                                    placeholder="MAC Address (XX:XX:XX:XX:XX:XX)"
                                     className="input input-bordered"
                                     name="macAddress"
                                     value={formData.macAddress}
                                     onChange={handleInputChange}
                                     required
                                 />
+                                {!isValidMacAddress(formData.macAddress) && (
+                                    <p className="text-red-500 mt-1">Please enter a valid MAC address</p>
+                                )}
                             </div>
                             <div className="form-control">
                                 <label className="label">

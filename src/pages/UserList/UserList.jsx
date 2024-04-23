@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaPhone, FaUserCheck, FaUserEdit, FaUserTimes } from 'react-icons/fa';
+import { FaCopy, FaPhone, FaUserCheck, FaUserEdit, FaUserTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const UserList = () => {
@@ -26,6 +26,9 @@ const UserList = () => {
         }
     };
 
+    const copyToClipboard = (text) => {
+        navigator.clipboard.writeText(text);
+    };
 
     const renderPaymentStatus = (user) => {
         if (user.due === 0) {
@@ -48,9 +51,11 @@ const UserList = () => {
             <h3 className="text-center my-3 text-3xl">Users List</h3>
             <div className="overflow-x-auto shadow-xl rounded-xl">
                 <div className="lg:flex md:flex space-y-4 p-5 justify-between my-4">
-                    <div className='btn btn-accent'>
-                        <Link to="/adduser">Add New User</Link>
-                    </div>
+                    <Link to="/adduser">
+                        <div className='btn btn-accent'>
+                            Add New User
+                        </div>
+                    </Link>
                     <div className=''>
                         <input type="text" placeholder="Search user" className="input input-bordered input-accent w-full max-w-xs" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
                     </div>
@@ -76,7 +81,12 @@ const UserList = () => {
                                 <td>{index + 1}</td>
                                 <td>{user.name}</td>
                                 <td>{user.mobile}</td>
-                                <td>{user.macAddress}</td>
+                                <td>
+                                    <div className='flex gap-2'>
+                                        <span>{user.macAddress}</span>
+                                        <FaCopy className='ml-2 cursor-pointer text-xl' onClick={() => copyToClipboard(user.macAddress)} />
+                                    </div>
+                                </td>
                                 <td>{user.mBill}</td>
                                 <td>{user.pay}</td>
                                 <td>{user.due}</td>
