@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { FaCopy, FaPhone, FaUserCheck, FaUserEdit, FaUserTimes } from 'react-icons/fa';
+import { FaCopy, FaPhone, FaUserEdit, FaUserTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import MacDevice from '../../components/DashComponents/MacDevice/MacDevice';
 
 const UserList = () => {
     const [users, setUsers] = useState([]);
@@ -51,12 +52,15 @@ const UserList = () => {
             <h3 className="text-center my-3 text-3xl">Users List</h3>
             <div className="overflow-x-auto shadow-xl rounded-xl">
                 <div className="lg:flex md:flex space-y-4 p-5 justify-between my-4">
-                    <Link to="/adduser">
-                        <div className='btn btn-accent'>
-                            Add New User
-                        </div>
-                    </Link>
-                    <div className=''>
+                    <div className='lg:flex gap-3'>
+                        <Link to="/adduser">
+                            <div className='btn btn-accent shadow-xl'>
+                                Add New User
+                            </div>
+                        </Link>
+                        <MacDevice></MacDevice>
+                    </div>
+                    <div className='shadow-xl'>
                         <input type="text" placeholder="Search user" className="input input-bordered input-accent w-full max-w-xs" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
                     </div>
                 </div>
@@ -83,8 +87,8 @@ const UserList = () => {
                                 <td>{user.mobile}</td>
                                 <td>
                                     <div className='flex gap-2'>
-                                        <span>{user.macAddress}</span>
-                                        <FaCopy className='ml-2 cursor-pointer text-xl' onClick={() => copyToClipboard(user.macAddress)} />
+                                        <span>{user.macAddress.toUpperCase()}</span>
+                                        <FaCopy className='ml-2 cursor-pointer text-xl' onClick={() => copyToClipboard(user.macAddress.toUpperCase())} />
                                     </div>
                                 </td>
                                 <td>{user.mBill}</td>
