@@ -17,15 +17,19 @@ const UserList = () => {
     }, []);
 
     const deleteUser = (index) => {
-        const updatedUsers = [...users];
-        updatedUsers.splice(index, 1);
-        setUsers(updatedUsers);
-        localStorage.setItem('users', JSON.stringify(updatedUsers));
+        const isConfirmed = window.confirm('Are you sure you want to delete this user?');
+        if (isConfirmed) {
+            const updatedUsers = [...users];
+            updatedUsers.splice(index, 1);
+            setUsers(updatedUsers);
+            localStorage.setItem('users', JSON.stringify(updatedUsers));
+        }
     };
+
 
     const renderPaymentStatus = (user) => {
         if (user.due === 0) {
-            return <Link to='/'><span className='bg-green-100 btn w-24'>Paid</span></Link>;
+            return <span className='bg-green-100 btn w-24'>Paid</span>;
         } else if (user.pay > user.billAmount) {
             return <span className='bg-blue-100 btn w-24'>Advanced</span>;
         } else {

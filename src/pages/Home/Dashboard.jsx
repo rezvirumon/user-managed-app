@@ -14,14 +14,20 @@ const Dashboard = () => {
 
     const totalPayments = users.reduce((total, user) => total + parseFloat(user.pay || 0), 0);
 
-    const totalDues = users.reduce((total, user) => total + parseFloat(user.due || 0), 0);
+    // Calculate total dues considering only users with positive due amounts
+    const totalDues = users.reduce((total, user) => {
+        if (user.due > 0) {
+            return total + parseFloat(user.due);
+        }
+        return total;
+    }, 0);
+
+    // Define criteria for identifying advanced users
+    const totalAdvancedUsers = users.filter(user => user.pay > 101).length;
 
     const totalPaidUsers = users.filter(user => user.due === 0).length;
 
     const totalUnpaidUsers = totalUsers - totalPaidUsers;
-
-    // Hypothetical criterion: Advanced users have paid more than $500
-    const totalAdvancedUsers = users.filter(user => user.pay > 500).length;
 
     return (
         <div className="container mx-auto min-h-screen">
