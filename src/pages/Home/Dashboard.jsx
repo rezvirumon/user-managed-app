@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import DeleteUserModal from '../../DeleteUserModal';
 
 const Dashboard = () => {
     const [users, setUsers] = useState([]);
@@ -31,43 +32,58 @@ const Dashboard = () => {
 
     return (
         <div className="container mx-auto min-h-screen">
-            <div className="grid lg:grid-cols-4 lg:gap-5 md:grid-cols-2 justify-center mt-5">
-                <div className="bg-blue-500 glass btn hover:bg-blue-600 w-80 h-24 shadow-xl rounded-xl p-2 m-4 cursor-pointer">
+            <div className="bg-base-200 shadow-xl glass rounded-xl lg:p-4 grid lg:grid-cols-4 lg:gap-2  md:grid-cols-3 mt-5">
+                <div className="bg-blue-500 glass btn hover:bg-blue-600 lg:w-80 h-24 rounded-xl p-2 m-4 cursor-pointer">
                     <div className="text-white flex items-center justify-between h-full w-full">
-                        <p className="flex items-center gap-3 text-2xl">Total Users: {totalUsers}</p>
+                        <p className="flex justify-between w-full pr-4 items-center gap-3 text-2xl">Total Users
+                            <span> {totalUsers}</span>
+                        </p>
                     </div>
                 </div>
-                <div className="bg-green-500 glass btn hover:bg-green-600 w-80 h-24 shadow-xl rounded-xl p-2 m-4 cursor-pointer">
+                <div className="bg-green-700 glass btn hover:bg-green-600 lg:w-80 h-24 rounded-xl p-2 m-4 cursor-pointer">
                     <div className="text-white flex items-center justify-between h-full w-full">
-                        <p className="flex items-center gap-3 text-2xl">Active Users: {activeUsers}</p>
+                        <p className="flex justify-between w-full pr-4 items-center gap-3 text-2xl">Active Users
+                            <span> {activeUsers}</span>
+                        </p>
                     </div>
                 </div>
-                <div className="bg-purple-500 glass btn hover:bg-purple-600 w-80 h-24 shadow-xl rounded-xl p-2 m-4 cursor-pointer">
+                <div className="bg-purple-700 glass btn hover:bg-purple-600 lg:w-80 h-24 rounded-xl p-2 m-4 cursor-pointer">
                     <div className="text-white flex items-center justify-between h-full w-full">
-                        <p className="flex items-center gap-3 text-2xl">Total Payments: ${totalPayments.toFixed(2)}</p>
+                        <p className="flex justify-between w-full pr-4 items-center gap-3 text-2xl">Total Payments
+                            <span> ${totalPayments.toFixed(2)}</span>
+                        </p>
                     </div>
                 </div>
-                <div className="bg-red-500 glass btn hover:bg-red-600 w-80 h-24 shadow-xl rounded-xl p-2 m-4 cursor-pointer">
+                <div className="bg-red-700 glass btn hover:bg-red-600 lg:w-80 h-24  rounded-xl p-2 m-4 cursor-pointer">
                     <div className="text-white flex items-center justify-between h-full w-full">
-                        <p className="flex items-center gap-3 text-2xl">Total Dues: ${totalDues.toFixed(2)}</p>
+                        <p className="flex justify-between w-full pr-4 items-center gap-3 text-2xl">Total Dues
+                            <span>${totalDues.toFixed(2)}</span>
+                        </p>
                     </div>
                 </div>
-                <div className="bg-yellow-500 glass btn hover:bg-yellow-600 w-80 h-24 shadow-xl rounded-xl p-2 m-4 cursor-pointer">
+                <div className="bg-yellow-700 glass btn hover:bg-yellow-600 lg:w-80 h-24  rounded-xl p-2 m-4 cursor-pointer">
                     <div className="text-white flex items-center justify-between h-full w-full">
-                        <p className="flex items-center gap-3 text-2xl">Paid Users: {totalPaidUsers}</p>
+                        <p className="flex justify-between w-full pr-4 items-center gap-3 text-2xl">Paid
+                            <span>{totalPaidUsers}</span>
+                        </p>
                     </div>
                 </div>
-                <div className="bg-purple-500 glass btn hover:bg-purple-600 w-80 h-24 shadow-xl rounded-xl p-2 m-4 cursor-pointer">
+                <div className="bg-purple-700 glass btn hover:bg-purple-600 lg:w-80 h-24 rounded-xl p-2 m-4 cursor-pointer">
                     <div className="text-white flex items-center justify-between h-full w-full">
-                        <p className="flex items-center gap-3 text-2xl">Advanced Users: {totalAdvancedUsers}</p>
+                        <p className="flex justify-between w-full pr-4 items-center gap-3 text-2xl">Advanced
+                            <span>{totalAdvancedUsers}</span>
+                        </p>
                     </div>
                 </div>
-                <div className="bg-gray-500 glass btn hover:bg-gray-600 w-80 h-24 shadow-xl rounded-xl p-2 m-4 cursor-pointer">
+                <div className="bg-fuchsia-700 glass btn hover:bg-fuchsia-600 lg:w-80 h-24 rounded-xl p-2 m-4 cursor-pointer">
                     <div className="text-white flex items-center justify-between h-full w-full">
-                        <p className={`flex items-center gap-3 text-2xl ${totalUnpaidUsers > 0 ? '' : ''}`}>Unpaid Users: {totalUnpaidUsers}</p>
+                        <p className={`flex justify-between w-full pr-4 items-center gap-3 text-2xl ${totalUnpaidUsers > 0 ? '' : ''}`}>Unpaid
+                            <span> {totalUnpaidUsers}</span>
+                        </p>
                     </div>
                 </div>
             </div>
+           
         </div>
     );
 };

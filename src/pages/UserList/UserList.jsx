@@ -6,6 +6,9 @@ import MacDevice from '../../components/DashComponents/MacDevice/MacDevice';
 const UserList = () => {
     const [users, setUsers] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [usersPerPage] = useState(50);
+    const [selectedStatus, setSelectedStatus] = useState('All');
 
     useEffect(() => {
         const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
@@ -41,27 +44,37 @@ const UserList = () => {
         }
     };
 
-    const filteredUsers = users.filter(user => {
-        const { name, mobile, macAddress } = user;
-        const query = searchQuery.toLowerCase();
-        return name.toLowerCase().includes(query) || mobile.includes(query) || macAddress.toLowerCase().includes(query);
-    });
+    // Pagination
+    const indexOfLastUser = currentPage * usersPerPage;
+    const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+    const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return (
-        <div className="container mt-20 mx-auto">
-            <h3 className="text-center my-3 text-3xl">Users List</h3>
-            <div className="overflow-x-auto shadow-xl rounded-xl">
-                <div className="lg:flex md:flex space-y-4 p-5 justify-between my-4">
-                    <div className='lg:flex gap-3'>
-                        <Link to="/adduser">
-                            <div className='btn btn-accent shadow-xl'>
-                                Add New User
-                            </div>
-                        </Link>
-                        <MacDevice></MacDevice>
+        <div className="container  mx-auto">
+            <div className='flex justify-evenly my-10 lg:justify-start lg:gap-3'>
+                <Link to="/adduser">
+                    <div className='btn btn-accent shadow-xl'>
+                        Add New User
                     </div>
-                    <div className='shadow-xl'>
-                        <input type="text" placeholder="Search user" className="input input-bordered input-accent w-full max-w-xs" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+                </Link>
+                <MacDevice></MacDevice>
+            </div>
+            <h3 className="text-center my-3 text-3xl">Users List</h3>
+            <div className="overflow-x-auto shadow-xl border h-[80vh] mb-10 rounded-xl">
+                <div className="lg:flex items-center md:flex space-y-4 p-5 justify-between my-4">
+                    <div className=''>
+                        <input type="text" placeholder="Search user" className="shadow-xl input input-bordered input-accent w-full lg:w-96 border lg:max-w-xs" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+                    </div>
+                    <div className=''>
+                        <select className="shadow-xl select select-info w-full lg:max-w-xs" value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
+                            <option value="All">Status</option>
+                            <option value="All">All</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Unpaid">Unpaid</option>
+                            <option value="Advanced">Advanced</option>
+                        </select>
                     </div>
                 </div>
                 <table className="table">
@@ -80,7 +93,7 @@ const UserList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredUsers.map((user, index) => (
+                        {currentUsers.map((user, index) => (
                             <tr className="hover hover:shadow-xl" key={index}>
                                 <td>{index + 1}</td>
                                 <td>{user.name}</td>
@@ -109,6 +122,14 @@ const UserList = () => {
                         ))}
                     </tbody>
                 </table>
+                {/* Pagination */}
+                <div className="pagination flex justify-center my-5 gap-5 ">
+                    <button className="btn" onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+                    {Array.from({ length: Math.ceil(users.length / usersPerPage) }, (_, i) => (
+                        <button key={i} className={`btn ${currentPage === i + 1 ? 'btn-accent' : ''}`} onClick={() => paginate(i + 1)}>{i + 1}</button>
+                    ))}
+                    <button className="btn" onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(users.length / usersPerPage)}>Next</button>
+                </div>
             </div>
         </div>
     );

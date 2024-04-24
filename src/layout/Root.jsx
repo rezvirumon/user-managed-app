@@ -6,7 +6,7 @@ import Footer from "../components/shared/Footer";
 const Root = () => {
     return (
         <div className="">
-            <div className="fixed z-20 top-0 w-full bg-base-200 h-[80px;] flex items-center justify-center">
+            <div className="fixed z-20 top-0 w-full shadow-xl bg-base-200 h-[80px;] flex items-center justify-center">
             <Navbar></Navbar>
             </div>
             <div className="relative top-20">

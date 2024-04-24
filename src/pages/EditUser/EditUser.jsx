@@ -31,12 +31,12 @@ const EditUser = () => {
     // Handler for input changes
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        if (name === 'billAmount') {
-            // Calculate the due when billAmount changes
+        if (name === 'billAmount' || name === 'pay') {
+            // Calculate the due when billAmount or pay changes
             setUser(prevUser => ({
                 ...prevUser,
                 [name]: value,
-                due: value - prevUser.pay
+                due: prevUser.billAmount - value
             }));
         } else {
             setUser({ ...user, [name]: value });
